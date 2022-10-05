@@ -78,28 +78,6 @@ public class CreateFilesUtils {
         cell = row.createCell(2);
         cell.setCellValue("1");
 
-        // Object[][] content = {
-        // {"Red Bull Racing", "Max Verstappen", 1},
-        // {"Mercedes AMG Petronas F1 Team", "Lewis Hamilton", 44},
-        // };
-
-        // int rowCount = 0;
-        //
-        // for (Object[] aBook : content) {
-        // Row row = sheet.createRow(++rowCount);
-        //
-        // int columnCount = 0;
-        //
-        // for (Object field : aBook) {
-        // Cell cell = row.createCell(++columnCount);
-        // if (field instanceof String) {
-        // cell.setCellValue((String) field);
-        // } else if (field instanceof Integer) {
-        // cell.setCellValue((Integer) field);
-        // }
-        // }
-        // }
-
         try (FileOutputStream outputStream = new FileOutputStream(FILE_PATH + "test-xslx.xlsx")) {
             workbook.write(outputStream);
         } catch (FileNotFoundException e) {
