@@ -10,7 +10,11 @@ repositories {
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.2'
+    testImplementation('org.junit.jupiter:junit-jupiter:5.9.0',
+            'com.opencsv:opencsv:5.7.0',
+            'com.github.librepdf:openpdf:1.3.30',
+            'org.apache.poi:poi:5.2.3',
+            'org.apache.poi:poi-ooxml:5.2.3')
 }
 
 test {
