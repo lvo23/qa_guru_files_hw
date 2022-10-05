@@ -14,19 +14,18 @@ import java.util.zip.ZipOutputStream;
 import org.apache.commons.io.FileUtils;
 
 /**
- * @author Vlad Litvinov
- * вспомогательный класс для действий с zip-файлами
- * почти всё нагло взято тут https://www.baeldung.com/java-compress-and-uncompress
+ * @author Vlad Litvinov вспомогательный класс для действий с zip-файлами почти всё нагло взято тут
+ *         https://www.baeldung.com/java-compress-and-uncompress
  */
 public class ZipUtils {
 
     private static final String FILE_PATH = "src/test/resources/";
 
     public static void createZipMultiFiles() throws Exception {
+
         final List<String> srcFiles = Arrays.asList(FILE_PATH + "test-csv.csv",
                 FILE_PATH + "test-pdf.pdf", FILE_PATH + "test-xslx.xlsx");
-        final FileOutputStream fos =
-                new FileOutputStream(FILE_PATH + "multiCompressed.zip");
+        final FileOutputStream fos = new FileOutputStream(FILE_PATH + "multiCompressed.zip");
         final ZipOutputStream zipOut = new ZipOutputStream(fos);
         for (final String srcFile : srcFiles) {
             final File fileToZip = new File(srcFile);
@@ -46,6 +45,7 @@ public class ZipUtils {
     }
 
     public static void unzip() throws Exception {
+
         final String fileZip = FILE_PATH + "multiCompressed.zip";
         final File destDir = new File("src/test/resources/unzip");
         final byte[] buffer = new byte[1024];
@@ -78,9 +78,10 @@ public class ZipUtils {
 
     /**
      * @see https://snyk.io/research/zip-slip-vulnerability и
-     * https://www.baeldung.com/java-compress-and-uncompress
+     *      https://www.baeldung.com/java-compress-and-uncompress
      */
     public static File newFile(File destinationDir, ZipEntry zipEntry) throws IOException {
+
         File destFile = new File(destinationDir, zipEntry.getName());
 
         String destDirPath = destinationDir.getCanonicalPath();
@@ -93,9 +94,17 @@ public class ZipUtils {
         return destFile;
     }
 
-    public static void deleteUnzipDirectory() throws Exception{
+    public static void deleteUnzipDirectory() throws Exception {
 
         FileUtils.deleteDirectory(new File(FILE_PATH + "unzip"));
+    }
+
+    public static void deleteCreatedTestFiles() throws Exception {
+
+        FileUtils.delete(new File(FILE_PATH + "test-csv.csv"));
+        FileUtils.delete(new File(FILE_PATH + "test-pdf.pdf"));
+        FileUtils.delete(new File(FILE_PATH + "test-xslx.xlsx"));
+        FileUtils.delete(new File(FILE_PATH + "multiCompressed.zip"));
     }
 
 }
