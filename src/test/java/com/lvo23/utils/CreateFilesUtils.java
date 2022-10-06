@@ -1,10 +1,12 @@
 package com.lvo23.utils;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.poi.ss.usermodel.Cell;
@@ -12,12 +14,17 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.pdf.PdfName;
 import com.lowagie.text.pdf.PdfString;
 import com.lowagie.text.pdf.PdfWriter;
+import com.lvo23.pojo.DriverPojo;
+import com.lvo23.pojo.TeamPojo;
 import com.opencsv.CSVWriter;
 
 /**
@@ -64,7 +71,7 @@ public class CreateFilesUtils {
 
         Row header = sheet.createRow(0);
         Cell headerCell = header.createCell(0);
-        headerCell.setCellValue("Team");
+        headerCell.setCellValue("TeamPojo");
         headerCell = header.createCell(1);
         headerCell.setCellValue("Driver");
         headerCell = header.createCell(2);
@@ -83,6 +90,21 @@ public class CreateFilesUtils {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void createTestJSONFile() throws Exception {
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        List<DriverPojo> drivers = Arrays.asList(new DriverPojo("Max Verstappen", 1),
+                new DriverPojo("Sergio Perez", 11));
+
+        TeamPojo team = new TeamPojo("Red Bull Racing", "Austria", "Christian Horner", drivers);
+
+        ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
+
+        writer.writeValue(new File("src/test/resources/json-test.json"), team);
+
     }
 
 }

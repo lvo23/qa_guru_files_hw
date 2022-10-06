@@ -1,6 +1,7 @@
 package com.lvo23;
 
 import static com.lvo23.utils.CreateFilesUtils.createTestCSVFile;
+import static com.lvo23.utils.CreateFilesUtils.createTestJSONFile;
 import static com.lvo23.utils.CreateFilesUtils.createTestPDFFile;
 import static com.lvo23.utils.CreateFilesUtils.createTestXLSFile;
 import static com.lvo23.utils.ZipUtils.createZipMultiFiles;
@@ -23,6 +24,7 @@ public class BaseTest {
         createTestPDFFile();
         createTestXLSFile();
         createZipMultiFiles();
+        createTestJSONFile();
         unzip();
     }
 

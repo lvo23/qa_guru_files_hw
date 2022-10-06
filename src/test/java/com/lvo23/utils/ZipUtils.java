@@ -2,7 +2,6 @@ package com.lvo23.utils;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
@@ -77,7 +76,7 @@ public class ZipUtils {
     }
 
     /**
-     * @see https://snyk.io/research/zip-slip-vulnerability и
+     * @see <a href="https://snyk.io/research/zip-slip-vulnerability">и</a>
      *      https://www.baeldung.com/java-compress-and-uncompress
      */
     public static File newFile(File destinationDir, ZipEntry zipEntry) throws IOException {
@@ -104,6 +103,7 @@ public class ZipUtils {
         FileUtils.delete(new File(FILE_PATH + "test-csv.csv"));
         FileUtils.delete(new File(FILE_PATH + "test-pdf.pdf"));
         FileUtils.delete(new File(FILE_PATH + "test-xslx.xlsx"));
+        FileUtils.delete(new File(FILE_PATH + "json-test.json"));
         FileUtils.delete(new File(FILE_PATH + "multiCompressed.zip"));
     }
 
