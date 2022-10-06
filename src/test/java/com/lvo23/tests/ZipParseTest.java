@@ -2,6 +2,8 @@ package com.lvo23.tests;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+import java.io.File;
+import java.io.FileReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
@@ -18,39 +20,32 @@ import com.opencsv.CSVReader;
  */
 public class ZipParseTest extends BaseTest {
 
-    ClassLoader cl = ZipParseTest.class.getClassLoader();
+    private static final String FILE_PATH = "src/test/resources/unzip/";
 
     @Test
     void pdfTest() throws Exception {
 
-        try (InputStream stream = cl.getResourceAsStream("unzip/test-pdf.pdf")) {
-            assert stream != null;
-            PDF pdf = new PDF(stream);
-            assertThat(pdf.text).contains("Hello World");
-        }
-        ;
+        PDF pdf = new PDF(new File(FILE_PATH + "test-pdf.pdf"));
+        assertThat(pdf.text).contains("Hello World");
+        // }
     }
 
     @Test
-    void xlsxTest() throws Exception {
+    void xlsxTest() {
 
-        try (InputStream stream = cl.getResourceAsStream("unzip/test-xslx.xlsx")) {
-            assert stream != null;
-            XLS xls = new XLS(stream);
-            assertThat(xls.excel.getSheet("Drivers and Teams").getRow(1).getCell(0)
-                    .getStringCellValue()).isEqualTo("Red Bull Racing");
-        }
+        XLS xls = new XLS(new File(FILE_PATH + "test-xslx.xlsx"));
+        assertThat(
+                xls.excel.getSheet("Drivers and Teams").getRow(1).getCell(0).getStringCellValue())
+                        .isEqualTo("Red Bull Racing");
     }
 
     @Test
     void csvTest() throws Exception {
 
-        try (InputStream stream = cl.getResourceAsStream("unzip/test-csv.csv");
-                CSVReader reader = new CSVReader(new InputStreamReader(stream))) {
-            List<String[]> content = reader.readAll();
-            String[] row = content.get(1);
-            assertThat(row[1]).contains("Red Bull Racing");
+        CSVReader reader = new CSVReader(new FileReader(FILE_PATH + "test-csv.csv"));
+        List<String[]> content = reader.readAll();
+        String[] row = content.get(1);
+        assertThat(row[1]).contains("Max Verstappen");
 
-        }
     }
 }
