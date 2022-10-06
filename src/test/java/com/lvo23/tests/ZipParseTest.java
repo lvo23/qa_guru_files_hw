@@ -16,9 +16,9 @@ import com.opencsv.CSVReader;
 /**
  * @author Vlad Litvinov
  */
-public class zipParseTest extends BaseTest {
+public class ZipParseTest extends BaseTest {
 
-    ClassLoader cl = zipParseTest.class.getClassLoader();
+    ClassLoader cl = ZipParseTest.class.getClassLoader();
 
     @Test
     void pdfTest() throws Exception {
