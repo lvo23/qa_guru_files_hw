@@ -1,7 +1,5 @@
 package com.lvo23.pojo;
 
-import java.sql.Driver;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
